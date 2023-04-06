@@ -1,15 +1,9 @@
-<mxfile host="app.diagrams.net" modified="2023-04-06T13:44:08.010Z" agent="5.0 (Macintosh)" etag="Q0jj640P4S2QXMPKrPIO" version="18.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-06T15:20:43.102Z" agent="5.0 (Macintosh)" etag="_PectLBn2MggHknWaBzR" version="18.1.1" type="github">
   <diagram id="LrehfFlCL_miOeviWvcQ" name="Page-1">
-    <mxGraphModel dx="1426" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1666" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-35" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="102" y="200" width="230" height="240" as="geometry" />
-        </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-34" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="652" y="200" width="230" height="340" as="geometry" />
-        </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-6" target="5jSKp_TQGfXwlnwANQmT-20">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="302" y="690" as="targetPoint" />
@@ -26,9 +20,6 @@
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-10" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;NEAR Recommender System&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Starting with User Recommendation&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Follow up system may include:&lt;/div&gt;&lt;div&gt;- Widgets (Apps),&lt;/div&gt;&lt;div&gt;- NFTs&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Author(s): A Serrano, C Kuehner, D Herrmann&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="60" y="40" width="300" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-11" value="&lt;h1&gt;Onboarding&lt;/h1&gt;&lt;p&gt;Cold recommendations depend on given User data:&lt;/p&gt;&lt;p&gt;- username &lt;br&gt;&lt;/p&gt;&lt;p&gt;- tags&lt;/p&gt;&lt;p&gt;- description&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;The sparser the data given, the more generic the recommendation" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="102" y="200" width="220" height="240" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-12" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-11" target="5jSKp_TQGfXwlnwANQmT-6">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -53,9 +44,6 @@
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-30" target="5jSKp_TQGfXwlnwANQmT-26">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-30" value="&lt;h1&gt;Active Users&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Activity based recommendations depend on given User data and their interaction:&lt;/p&gt;&lt;p&gt;- username &lt;br&gt;&lt;/p&gt;&lt;p&gt;- tags&lt;/p&gt;&lt;p&gt;- description&lt;/p&gt;&lt;p&gt;- posts, including image recognition (topic)&lt;br&gt;&lt;/p&gt;&lt;p&gt;- comments&lt;/p&gt;&lt;p&gt;- NFT collection (topics)&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;The sparser the data given, the more generic the recommendation" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="652" y="200" width="220" height="340" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-36" value="Metrics" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="780" y="970" width="140" height="90" as="geometry" />
@@ -162,7 +150,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-81" value="Graph Relations" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;shadow=0;glass=0;sketch=0;fontSize=12;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="962" y="140" width="288" height="120" as="geometry" />
+          <mxGeometry x="960" y="140" width="288" height="120" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-82" value="because you followed X, see [Y1, Y2, ..., Yn]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;shadow=0;glass=0;sketch=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-81">
           <mxGeometry y="30" width="288" height="30" as="geometry" />
@@ -172,6 +160,24 @@
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-84" value="Item 3" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;shadow=0;glass=0;sketch=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-81">
           <mxGeometry y="90" width="288" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-87" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="652" y="200" width="230" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-34" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-87">
+          <mxGeometry width="230" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-30" value="&lt;h1&gt;Active Users&lt;br&gt;&lt;/h1&gt;&lt;p&gt;Activity based recommendations depend on given User data and their interaction:&lt;/p&gt;&lt;p&gt;- username &lt;br&gt;&lt;/p&gt;&lt;p&gt;- tags&lt;/p&gt;&lt;p&gt;- description&lt;/p&gt;&lt;p&gt;- posts, including image recognition (topic)&lt;br&gt;&lt;/p&gt;&lt;p&gt;- comments&lt;/p&gt;&lt;p&gt;- NFT collection (topics)&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;The sparser the data given, the more generic the recommendation" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-87">
+          <mxGeometry width="220" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-88" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="102" y="200" width="230" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-35" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-88">
+          <mxGeometry width="230" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-11" value="&lt;h1&gt;Onboarding&lt;/h1&gt;&lt;p&gt;Cold recommendations depend on given User data:&lt;/p&gt;&lt;p&gt;- username &lt;br&gt;&lt;/p&gt;&lt;p&gt;- tags&lt;/p&gt;&lt;p&gt;- description&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;The sparser the data given, the more generic the recommendation" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-88">
+          <mxGeometry width="220" height="240" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
