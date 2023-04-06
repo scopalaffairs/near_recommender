@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-06T13:33:48.059Z" agent="5.0 (Macintosh)" etag="2HFiR9_sg20jfbjga9jj" version="18.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-06T13:36:25.866Z" agent="5.0 (Macintosh)" etag="E4Ujx8ZEbR7ZC9VTyI_L" version="18.1.1" type="github">
   <diagram id="LrehfFlCL_miOeviWvcQ" name="Page-1">
     <mxGraphModel dx="1426" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -58,7 +58,7 @@
           <mxGeometry x="652" y="200" width="220" height="340" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-36" value="Metrics" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="242" y="940" width="140" height="90" as="geometry" />
+          <mxGeometry x="780" y="970" width="140" height="90" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-37" value="Conversion" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-36">
           <mxGeometry y="30" width="140" height="30" as="geometry" />
@@ -66,18 +66,13 @@
         <mxCell id="5jSKp_TQGfXwlnwANQmT-45" value="Score (Similarity)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-36">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-37">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="472" y="985" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-41" value="GAN system" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="472" y="970" width="260" height="80" as="geometry" />
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-41" value="GAN system" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;shadow=0;sketch=0;swimlaneLine=1;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="104" y="920" width="398" height="80" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-42" value="Competing agents to rate the conversion of &#xa;&#xa;recommended items/Users&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=12;" vertex="1" parent="5jSKp_TQGfXwlnwANQmT-41">
-          <mxGeometry y="30" width="260" height="50" as="geometry" />
+          <mxGeometry y="30" width="398" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="5jSKp_TQGfXwlnwANQmT-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.318;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-45" target="5jSKp_TQGfXwlnwANQmT-21">
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="5jSKp_TQGfXwlnwANQmT-41" source="5jSKp_TQGfXwlnwANQmT-41" target="5jSKp_TQGfXwlnwANQmT-42">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-49" value="Methodologies" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=12;" vertex="1" parent="1">
@@ -142,8 +137,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-72" target="5jSKp_TQGfXwlnwANQmT-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="5jSKp_TQGfXwlnwANQmT-72" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;sketch=1;fontSize=12;fillColor=#0000FF;" vertex="1" parent="1">
           <mxGeometry x="1200" y="835" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="5jSKp_TQGfXwlnwANQmT-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="1" source="5jSKp_TQGfXwlnwANQmT-37" target="5jSKp_TQGfXwlnwANQmT-41">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
