@@ -4,7 +4,7 @@
 import asyncio
 import pickle
 import threading
-from typing import List, String
+from typing import List, Tuple
 
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
@@ -15,9 +15,7 @@ from features.utils import *
 
 
 async def get_similar_post_users(
-    data: str,
-    query: str,
-    top_k: int = 5
+    data: str, query: str, top_k: int = 5
 ) -> List[Tuple[str, float, str, str]]:
     """
     Returns the top k most similar sentences in a corpus to a given query sentence.
@@ -56,6 +54,6 @@ async def get_similar_post_users(
             df=df,
         )
 
-    corpus_embeddings = await run_update_model(embedder, sentences)
+    corpus_embeddings = await run_update_model(embedder, sentences) # just run on command
     await save_pretrained_model(filename, corpus_embeddings)
     t.join()
