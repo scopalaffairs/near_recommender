@@ -29,8 +29,8 @@ epdb = "^0.15.1"
 ipython = "^8.12.0"
 
 [tool.poetry.scripts]
-rec = "near_recommender.src.main"
-routine1 = "near_recommender.src.routine1"
+update = "near_recommender.models.similar_posts:update_model"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,11 +1,11 @@
 import demoji
 import pandas as pd
 
-from features.preprocessors import normalize_corpus
+from near_recommender.features.preprocessors import normalize_corpus
 
 
 def get_dataframe(data, col_source, col_target, remove_links=None):
-    df = pd.read_sql_query(data)
+    df = pd.read_csv(data)
     df = df.drop_duplicates()
     df = df.dropna(subset=col_source).copy()
     df[col_target] = df[col_source].apply(

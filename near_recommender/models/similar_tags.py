@@ -7,8 +7,9 @@ from typing import Dict, List
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from features.preprocessors import clean_profile_column, dissolve_nested_list
-from features.related_profile_tags import find_similar_users
+from near_recommender.features.preprocessors import (clean_profile_column,
+                                                     dissolve_nested_list)
+from near_recommender.features.related_profile_tags import find_similar_users
 
 
 async def get_similar_tags_users(
