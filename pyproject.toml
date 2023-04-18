@@ -14,6 +14,8 @@ demoji = "^1.1.0"
 pandas = "^2.0.0"
 numpy = "^1.24.2"
 sphinx = "^6.1.3"
+click = "^8.1.3"
+torch = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.3.1"
@@ -29,8 +31,9 @@ epdb = "^0.15.1"
 ipython = "^8.12.0"
 
 [tool.poetry.scripts]
-update = "near_recommender.models.similar_posts:update_model"
-
+main = "near_recommender.src.main:main"
+update_corpus = "near_recommender.src.models.similar_posts:update_model"
+similar_posts = "near_recommender.src.models.similar_posts:get_similar_post_users"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
