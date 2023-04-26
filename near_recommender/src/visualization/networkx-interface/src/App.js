@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import FilterUsers from "./components/FilterUsers";
-import json_string from "./data/matrix_intersection_02.json";
+import json_string from "./data/matrix_intersection_05.json";
 
 function App() {
 	const [data, setData] = useState([]);

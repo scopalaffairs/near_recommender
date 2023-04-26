@@ -41,7 +41,8 @@ const UserFilter = ({ userMatrix }) => {
 								{user.recommended_users.map(
 									(recommendedUser) => (
 										<li key={recommendedUser.node}>
-											{recommendedUser.node} | {recommendedUser.authority}
+											{recommendedUser.node} |{" "}
+											{recommendedUser.authority}
 										</li>
 									)
 								)}
@@ -50,7 +51,7 @@ const UserFilter = ({ userMatrix }) => {
 					))}
 				</ul>
 			)}
- <NetworkVisualization data={filteredUsers}/>
+			<NetworkVisualization data={filteredUsers} />
 		</div>
 	);
 };

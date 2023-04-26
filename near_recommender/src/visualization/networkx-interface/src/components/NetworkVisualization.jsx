@@ -1,19 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
-//import './NetworkVisualization.css';
 
 const NetworkVisualization = ({ data }) => {
 	const svgRef = useRef(null);
 
 	useEffect(() => {
-
 		const nodes = data.reduce((acc, item) => {
 			acc.push({ id: item.user, group: "User", radius: 2 });
 			item.recommended_users.forEach((user) => {
 				acc.push({
 					id: user.node,
 					group: "Recommended Users",
-					radius: 2,
 				});
 			});
 			return acc;
@@ -24,20 +21,18 @@ const NetworkVisualization = ({ data }) => {
 				acc.push({
 					source: item.user,
 					target: user.node,
-					value: user.authority,
+					authority: user.authority,
 				});
 			});
 			return acc;
 		}, []);
-	
-		console.log(nodes)
-		const svg = d3.select(svgRef.current);
 
-		// Define the dimensions of the SVG canvas
-		const width = +svg.attr("width");
-		const height = +svg.attr("height");
+		console.log(nodes);
 
-		// Create a force simulation to lay out the nodes and links
+		const width = 800;
+		const height = 600;
+		const radius = 5;
+
 		const simulation = d3
 			.forceSimulation()
 			.force(
@@ -47,7 +42,11 @@ const NetworkVisualization = ({ data }) => {
 			.force("charge", d3.forceManyBody())
 			.force("center", d3.forceCenter(width / 2, height / 2));
 
-		// Add the links to the SVG canvas
+		const svg = d3
+			.select(svgRef.current)
+			.append("svg")
+			.attr("viewBox", [0, 0, width, height]);
+
 		const link = svg
 			.append("g")
 			.attr("class", "links")
@@ -55,9 +54,11 @@ const NetworkVisualization = ({ data }) => {
 			.data(links)
 			.enter()
 			.append("line")
-			.attr("stroke-width", (d) => Math.sqrt(d.value));
+			//.attr("stroke-width", (d) => Math.sqrt(d.authority))
+			.attr("stroke-width", (d) => (d.authority*1000))
+			.attr("stroke", "#fff")
+			.attr("stroke-opacity", ".9");
 
-		// Add the nodes to the SVG canvas
 		const node = svg
 			.append("g")
 			.attr("class", "nodes")
@@ -65,10 +66,13 @@ const NetworkVisualization = ({ data }) => {
 			.data(nodes)
 			.enter()
 			.append("circle")
-			.attr("r", 5)
-			.attr("fill", "#69b3a2");
+			.attr("r", radius)
+			//.attr("fill", "#59E692")
+			.attr("fill", (d) => color(d.group))
+			.call(drag(simulation))
+			//.on("mouseover", handleMouseOver)
+			//.on("mouseout", handleMouseOut);
 
-		// Define the tick function to update the position of the nodes and links
 		const ticked = () => {
 			link.attr("x1", (d) => d.source.x)
 				.attr("y1", (d) => d.source.y)
@@ -78,9 +82,38 @@ const NetworkVisualization = ({ data }) => {
 			node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 		};
 
-		// Run the simulation and update the positions of the nodes and links on each tick
 		simulation.nodes(nodes).on("tick", ticked);
 		simulation.force("link").links(links);
+
+		function color(group) {
+			const scale = d3.scaleOrdinal(d3.schemeCategory10);
+			return scale(group);
+		}
+
+		function drag(simulation) {
+			function dragstarted(event) {
+				if (!event.active) simulation.alphaTarget(0.3).restart();
+				event.subject.fx = event.subject.x;
+				event.subject.fy = event.subject.y;
+			}
+
+			function dragged(event) {
+				event.subject.fx = event.x;
+				event.subject.fy = event.y;
+			}
+
+			function dragended(event) {
+				if (!event.active) simulation.alphaTarget(0);
+				event.subject.fx = null;
+				event.subject.fy = null;
+			}
+
+			return d3
+				.drag()
+				.on("start", dragstarted)
+				.on("drag", dragged)
+				.on("end", dragended);
+		}
 	}, [data]);
 
 	return (
