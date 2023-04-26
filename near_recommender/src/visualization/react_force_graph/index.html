@@ -1,0 +1,49 @@
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/react/umd/react.production.min.js"></script>
+  <script src="//unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+  <script src="//unpkg.com/@babel/standalone"></script>
+
+  <script src="//unpkg.com/three"></script>
+  <script src="//unpkg.com/react-force-graph-3d"></script>
+</head>
+
+<body>
+  <div id="graph"></div>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three/build/three.module.js" }}</script>
+  <script type="text/jsx" data-type="module">
+    import { UnrealBloomPass } from '//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+    const { useRef, useEffect } = React;
+
+    fetch('./trending_users.json').then(res => res.json()).then(data => {
+      const FocusGraph = () => {
+        const fgRef = useRef();
+
+        useEffect(() => {
+          const bloomPass = new UnrealBloomPass();
+          bloomPass.strength = 1;
+          bloomPass.radius = 1.5;
+          bloomPass.threshold = 0.1;
+          fgRef.current.postProcessingComposer().addPass(bloomPass);
+
+        }, []);
+        
+
+        return <ForceGraph3D
+          ref={fgRef}
+          graphData={data}
+          nodeLabel="id"
+          nodeAutoColorBy="group"
+        />;
+      };
+
+      ReactDOM.render(
+        <FocusGraph/>,
+        document.getElementById('graph')
+      );
+    });
+  </script>
+</body>
