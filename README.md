@@ -11,11 +11,11 @@ This project was done in collaboration with [Pagoda](https://www.pagoda.co/), a 
 
 ### Introduction
 
-NEAR Social is a social network that is developed on the NEAR Blockchain where users log in using their NEAR wallet address. Every action they take (post, follows, likes or profile updates) is broadcasted as a blockchain transaction and saved in the public ledger. The data belongs to the users and developers can create open-source apps called widgets to extend the platform's functionality in a permissionless way.
+NEAR Social is a blockchain-based social network where users log in with their NEAR wallet address. All user actions, such as posting, following, liking, and updating their profile, are recorded on the public ledger as blockchain transactions. Users own their data, and developers can create permissionless open-source apps, known as widgets, to expand the platform's capabilities.
 
 ### Task
 
-Our task was to create a user recommendation system that would enable users to connect with similar minded people and make the network grow. For that, we had to design a system that took into account the different on-chain data available for each user. We used 4 different recommendation algorithms following the architectural overview below:
+Our objective was to develop a user recommendation system that fosters network growth by connecting users with similar interests. To achieve this, we designed a system that utilizes on-chain data for each user. We employed four distinct recommendation algorithms, as illustrated in the architectural overview below:
 
 - Top trending users
 - Friends of friends
