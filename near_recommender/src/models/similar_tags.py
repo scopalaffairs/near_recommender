@@ -50,4 +50,11 @@ async def get_similar_tags_users(
     )
     profiles[col_agg_tags] = profiles[col_agg_tags].apply(dissolve_nested_list)
 
-    return find_similar_users(profiles, col_agg_tags, idx, top_k)
+    similar_users = find_similar_users(profiles, col_agg_tags, idx, top_k)
+    response_dict = {
+        "similar_users": [
+            {"user_id": user_id, "similarity_score": similarity_score}
+            for user_id, similarity_score in similar_users
+        ]
+    }
+    return json.dumps(response_dict)

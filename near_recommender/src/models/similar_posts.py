@@ -36,11 +36,7 @@ def get_similar_post_users(
         top_k (int, optional): The number of top similar sentences to return. Defaults to 5.
 
     Returns:
-        List[Tuple[str, float, str, str]]: A list of tuples, where each tuple contains:
-            1. The similar sentence to the query.
-            2. The similarity score between the query and the similar sentence.
-            3. The original post text of the similar sentence.
-            4. The cleaned post text of the similar sentence.
+        dict: A dictionary containing the top-k most similar sentences to the query.
     """
     embedder = SentenceTransformer(model)
     df, sentences = get_dataframe(data, col_source, col_target, remove_links=True)
@@ -53,7 +49,7 @@ def get_similar_post_users(
         sentences=sentences,
         df=df
     )
-    print(top_n_sentences)
+    return {"similar_sentences": top_n_sentences}
 
 
 def update_model():
