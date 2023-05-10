@@ -37,14 +37,14 @@ This project used the on-chain data on the NEAR blockchain via the Databricks in
 Among others, we explored the given datasets with the following methods:
 
 - Friends of friends
-- - XGBoost
-- - RandomForest
+  - XGBoost
+  - RandomForest
 - Trending users
-- - NetworkX
-- - Louvain community detection
+  - NetworkX
+  - Louvain community detection
 - Tag/Post Similarity
-- - Natural Language Processing, Cosine Similarity
-- - Pooled word embeddings on Large Transformer Model, Cosine Similarity
+  - Natural Language Processing, Cosine Similarity
+  - Pooled word embeddings on Large Transformer Model, Cosine Similarity
 
 ### SQL queries
 
