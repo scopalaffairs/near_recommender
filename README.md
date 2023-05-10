@@ -32,6 +32,20 @@ This recommender system is available through a widget on [near.org](https://near
 
 This project used the on-chain data on the NEAR blockchain via the Databricks instance of Pagoda. We created SQL queries and tables as well as Data Science Notebooks.
 
+## Methodologies
+
+Among others, we explored the given datasets with the following methods:
+
+- Friends of friends
+- - XGBoost
+- - RandomForest
+- Trending users
+- - NetworkX
+- - Louvain community detection
+- Tag/Post Similarity
+- - Natural Language Processing, Cosine Similarity
+- - Pooled word embeddings on Large Transformer Model, Cosine Similarity
+
 ### SQL queries
 
 We created our own SQL tables using existing parsed tables to process the data to our needs. These tables include:
