@@ -14,7 +14,20 @@ from near_recommender.src.models.similar_tags import get_similar_tags_users
 from near_recommender.src.models.trending_users import get_trending_users
 
 
-def main(users: List[Dict[str, any]]) -> None:
+def get_recommendations(users: List[Dict[str, any]]) -> None:
+    """
+    Runs a recommendation system and writes recommendations for each user to a JSON file in an S3 bucket.
+
+    Recommendation system logic:
+        - If the user is new (< 1 week, < 3 days): returns trending users
+        - If the user is not active: returns trending users
+        - If the user is active: returns friends-of-friends
+        - If the user has a tag: returns tag similarity
+        - If the user has posted: returns post similarity
+        - If the user was inactive for some period: returns trending users
+
+    Writes a JSON file to an S3 bucket containing a dictionary with user IDs as keys and recommended users as values.
+    """
     s3 = boto3.client('s3')
     bucket_name = 'near-public-lakehouse'
 
@@ -54,4 +67,4 @@ def main(users: List[Dict[str, any]]) -> None:
 
 
 if __name__ == "__main__":
-    main(df)
+    get_recommendations(users)
