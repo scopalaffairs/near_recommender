@@ -13,6 +13,10 @@ from near_recommender.src.models.similar_posts import get_similar_post_users
 from near_recommender.src.models.similar_tags import get_similar_tags_users
 from near_recommender.src.models.trending_users import get_trending_users
 
+access_key = dbutils.secrets.get(scope="aws", key="access-key")
+secret_key = dbutils.secrets.get(scope="aws", key="secret-access-key")
+region_name = 'eu-central-1'
+
 
 def get_recommendations(users: List[Dict[str, any]]) -> None:
     """
@@ -62,7 +66,12 @@ def get_recommendations(users: List[Dict[str, any]]) -> None:
 
         filename = f"{user['id']}_recommendations.json"
         s3.put_object(
-            Bucket=bucket_name, Key=filename, Body=json.dumps(recommendations)
+            aws_access_key_id=access_key,
+            aws_secret_access_key=secret_key,
+            region_name=region_name,
+            Bucket=bucket_name,
+            Key=filename,
+            Body=json.dumps(recommendations)
         )
 
 
