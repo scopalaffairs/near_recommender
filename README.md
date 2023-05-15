@@ -70,4 +70,4 @@ The recommender system has been implemented as a widget. This can be found under
 
 Unveiling the web of network connections and community clusters, several iterations of visual interfaces gave us a comprehensive understanding of user relationships, facilitating trending user recommendations and fine tuning the models.
 
-![Visualization of the near social network and its clusters]("near_recommender/docs/images/near_network_graph_still.png")
+![Visualization of the near social network and its clusters](near_recommender/docs/images/near_network_graph_still.png)
