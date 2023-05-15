@@ -1,4 +1,3 @@
-import asyncio
 import pickle
 from typing import List
 
