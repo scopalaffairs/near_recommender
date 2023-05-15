@@ -22,7 +22,7 @@ Our objective was to develop a user recommendation system that fosters network g
 - Tag similarity 
 - Post similarity
 
-![Recommender System Architectural Overview](Images/Architecture.png)
+![Recommender System Architectural Overview](near_recommender/docs/images/Architecture.png)
 
 ### Result
 
