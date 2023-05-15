@@ -7,6 +7,8 @@ from typing import Dict, List
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from near_recommender.src.data import get_dataframe
+from near_recommender.src.data.queries.query_get_profile_tags import query as query_tags
 from near_recommender.src.features.preprocessors import (
     clean_profile_column,
     dissolve_nested_list,
@@ -14,7 +16,7 @@ from near_recommender.src.features.preprocessors import (
 from near_recommender.src.features.related_profile_tags import find_similar_users
 
 
-async def get_similar_tags_users(
+def get_similar_tags_users(
     idx: int, data: str, top_k: int = 5
 ) -> List[Dict[str, List[str]]]:
     """Returns the top-k users with similar tags as the specified user.
@@ -36,6 +38,7 @@ async def get_similar_tags_users(
     col_source = "profile"
     col_target = "tags"
     col_agg_tags = "aggregated_tags"
+    data = query_tags
 
     tags, _ = get_dataframe(data, col_source, col_target)
     tags[col_source] = clean_profile_column(tags[col_source])

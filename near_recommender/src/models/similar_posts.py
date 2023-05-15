@@ -6,8 +6,8 @@ import pickle
 import threading
 from typing import List, Tuple
 
-import click
 import pandas as pd
+from pyspark.sql import SparkSession
 from sentence_transformers import SentenceTransformer, util
 
 from near_recommender.src.data.get_dataframe import get_dataframe
@@ -20,11 +20,12 @@ path = "near_recommender/"
 filename = path + f"models/corpus_embeddings_{model}.pickle"
 col_source = "post_text"
 col_target = "clean_text"
-data = "near_recommender/src/data/files/silver_posts.csv"
+
+spark = SparkSession.builder.getOrCreate()
+result = spark.sql(posts_query)
+data = result.toPandas()
 
 
-@click.command()
-@click.option("--query", help="The query for the current post to find similarities on.")
 def get_similar_post_users(
     query: str, data: str = data, top_k: int = 5
 ) -> List[Tuple[str, float, str, str]]:
@@ -47,12 +48,12 @@ def get_similar_post_users(
         corpus_embeddings=corpus_embeddings,
         top_k=top_k,
         sentences=sentences,
-        df=df
+        df=df,
     )
     return {"similar_sentences": top_n_sentences}
 
 
-def update_model():
+def update_corpus():
     embedder = SentenceTransformer(model)
     _, sentences = get_dataframe(data, col_source, col_target, remove_links=True)
     corpus_embeddings = run_update_model(embedder, sentences)

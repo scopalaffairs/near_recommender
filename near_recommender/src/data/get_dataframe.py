@@ -4,8 +4,7 @@ import pandas as pd
 from near_recommender.src.features.preprocessors import normalize_corpus
 
 
-def get_dataframe(data, col_source, col_target, remove_links=None):
-    df = pd.read_csv(data)
+def get_dataframe(df, col_source, col_target, remove_links=None):
     df = df.drop_duplicates()
     df = df.dropna(subset=col_source).copy()
     df[col_target] = df[col_source].apply(

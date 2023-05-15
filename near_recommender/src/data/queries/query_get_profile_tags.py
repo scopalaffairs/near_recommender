@@ -4,7 +4,7 @@ SELECT
   profile:tags,
   block_timestamp
 FROM
-  hive_metastore.sit.near_social_txs_clean
+  hive_metastore.mainnet.silver_near_social_txs_parsed
 WHERE
-  profile:tags IS NOT NULL
+  profile:tags IS NOT NULL;
 """
