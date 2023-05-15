@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 # (c) scopalaffairs 2023 - present.
 
-import asyncio
-import pickle
-import threading
+
 from typing import List, Tuple
 
-import pandas as pd
 from pyspark.sql import SparkSession
 from sentence_transformers import SentenceTransformer, util
 
@@ -16,8 +13,8 @@ from near_recommender.src.features.top_sentences import return_similar_sentences
 from near_recommender.src.features.utils import *
 
 model = "all-mpnet-base-v2"
-path = "near_recommender/"
-filename = path + f"models/corpus_embeddings_{model}.pickle"
+path = "/dbfs/FileStore/models/"
+filename = path + f"corpus_embeddings_{model}.pickle"
 col_source = "post_text"
 col_target = "clean_text"
 

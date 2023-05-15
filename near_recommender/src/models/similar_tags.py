@@ -1,19 +1,29 @@
 # -*- coding: utf-8 -*-
 # (c) scopalaffairs 2023 - present.
 
-import asyncio
+
 from typing import Dict, List
 
+from pyspark.sql import SparkSession
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 from near_recommender.src.data import get_dataframe
-from near_recommender.src.data.queries.query_get_profile_tags import query as query_tags
+from near_recommender.src.data.queries.query_get_profile_tags import query as tags_query
 from near_recommender.src.features.preprocessors import (
     clean_profile_column,
     dissolve_nested_list,
 )
 from near_recommender.src.features.related_profile_tags import find_similar_users
+
+signer = "signer_id"
+col_source = "profile"
+col_target = "tags"
+col_agg_tags = "aggregated_tags"
+
+spark = SparkSession.builder.getOrCreate()
+result = spark.sql(tags_query)
+data = result.toPandas()
 
 
 def get_similar_tags_users(
@@ -34,11 +44,6 @@ def get_similar_tags_users(
         TypeError: If the input top_k value is not an integer.
 
     """
-    signer = "signer_id"
-    col_source = "profile"
-    col_target = "tags"
-    col_agg_tags = "aggregated_tags"
-    data = query_tags
 
     tags, _ = get_dataframe(data, col_source, col_target)
     tags[col_source] = clean_profile_column(tags[col_source])
@@ -54,10 +59,12 @@ def get_similar_tags_users(
     profiles[col_agg_tags] = profiles[col_agg_tags].apply(dissolve_nested_list)
 
     similar_users = find_similar_users(profiles, col_agg_tags, idx, top_k)
-    response_dict = {
-        "similar_users": [
-            {"user_id": user_id, "similarity_score": similarity_score}
-            for user_id, similarity_score in similar_users
-        ]
-    }
-    return json.dumps(response_dict)
+    response_dict = json.dumps(
+        {
+            "similar_users": [
+                {"user_id": user_id, "similarity_score": similarity_score}
+                for user_id, similarity_score in similar_users
+            ]
+        }
+    )
+    return response_dict
