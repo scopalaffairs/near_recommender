@@ -5,9 +5,13 @@ This repository contains the files used for the Capstone Project "NEAR Social Re
 This project was done in collaboration with [Pagoda](https://www.pagoda.co/), a software development company behind the NEAR Blockchain Operating System.
 
 ### Authors
+
 [Agustin Rojo Serrano](https://www.linkedin.com/in/rojoserrano/),
+
 [Christian Kühner](https://www.linkedin.com/in/christian-k%C3%BChner-9295301b1/), 
-[Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/), 
+
+[Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/)
+
 
 ## NEAR Social
 
