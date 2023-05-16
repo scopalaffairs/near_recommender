@@ -10,10 +10,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from near_recommender.src.data import get_dataframe
 from near_recommender.src.data.queries.query_get_profile_tags import query as tags_query
-from near_recommender.src.features.preprocessors import (
-    clean_profile_column,
-    dissolve_nested_list,
-)
 from near_recommender.src.features.related_profile_tags import find_similar_users
 
 signer = "signer_id"
@@ -26,9 +22,7 @@ result = spark.sql(tags_query)
 data = result.toPandas()
 
 
-def get_similar_tags_users(
-    idx: int, data: str, top_k: int = 5
-) -> List[Dict[str, List[str]]]:
+def get_similar_tags_users(idx: int, top_k: int = 5) -> List[Dict[str, List[str]]]:
     """Returns the top-k users with similar tags as the specified user.
 
     Args:
@@ -46,24 +40,22 @@ def get_similar_tags_users(
     """
 
     tags, _ = get_dataframe(data, col_source, col_target)
-    tags[col_source] = clean_profile_column(tags[col_source])
     tags.dropna(subset=col_source).copy()
-    tags[col_target] = tags[col_source].apply(
-        lambda x: [
-            normalize_document(k) if isinstance(k, str) else k for k, _ in x.items()
-        ]
-    )
     profiles = (
         tags.groupby(signer)[col_target].apply(list).reset_index(name=col_agg_tags)
     )
-    profiles[col_agg_tags] = profiles[col_agg_tags].apply(dissolve_nested_list)
-
+    profiles[col_agg_tags] = profiles[col_agg_tags].apply(
+        lambda x: [word for sublist in x for word in sublist.split()]
+    )
     similar_users = find_similar_users(profiles, col_agg_tags, idx, top_k)
     response_dict = json.dumps(
         {
             "similar_users": [
-                {"user_id": user_id, "similarity_score": similarity_score}
-                for user_id, similarity_score in similar_users
+                {
+                    "signer_id": item['similar_profile']['signer_id'],
+                    "similarity_score": item['score']
+                }
+                for item in similar_users
             ]
         }
     )

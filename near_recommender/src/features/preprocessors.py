@@ -1,6 +1,9 @@
+import json
 import re
 
 import contractions
+import nltk
+import pandas as pd
 import tqdm
 
 
@@ -14,7 +17,7 @@ def normalize_document(doc, remove_links=None):
     doc = doc.translate(doc.maketrans("\n\t\r", "   "))
     doc = doc.lower()
     doc = contractions.fix(doc)
-    doc = re.sub(r'[^a-zA-Z\s]', ' ', doc, re.I | re.A)
+    doc = re.sub(r'[^a-zA-Z0-9\s]', ' ', doc, re.I | re.A)
     doc = re.sub(' +', ' ', doc)
     doc = re.sub('\{\}\"', '', doc)
     doc = doc.strip()
@@ -29,19 +32,3 @@ def normalize_corpus(docs, remove_links=None):
         norm_docs.append(norm_doc)
 
     return norm_docs
-
-
-def clean_profile_column(series):
-    def remove_null_values(d):
-        return {k: v for k, v in d.items() if v is not None}
-
-    cleaned_values = series.apply(
-        lambda x: remove_null_values(json.loads(x)) if pd.notnull(x) else None
-    )
-    cleaned_values = cleaned_values[cleaned_values.apply(lambda x: bool(x))]
-
-    return cleaned_values
-
-
-def dissolve_nested_list(lst):
-    return [element for sublist in lst for element in sublist]
