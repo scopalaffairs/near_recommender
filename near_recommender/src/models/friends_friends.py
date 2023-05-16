@@ -5,12 +5,26 @@ import mlflow.sklearn
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from pyspark.sql import SparkSession
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import confusion_matrix, precision_score
 from sklearn.model_selection import train_test_split
 
+spark = SparkSession.builder.getOrCreate()
+spark_df_path = "/FileStore/tables/active_user_follow_matrix.csv"
+
 
 def get_friends_of_friends(spark_df_path):
+    """
+    Reads a CSV file as a Spark DataFrame and trains an XGBoost model to predict user connections.
+
+    Args:
+        spark_df_path (str): The path to the CSV file containing the input data for the Spark DataFrame.
+
+    Returns:
+        dict: A dictionary containing the predicted users as a NumPy array.
+    """
+
     spark_df = (
         spark.read.format("csv")
         .option("delimiter", ",")
