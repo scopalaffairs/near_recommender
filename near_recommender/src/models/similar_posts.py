@@ -54,7 +54,7 @@ def get_similar_post_users(
         sentences=sentences,
         df=df,
     )
-    return {"similar_sentences": top_n_sentences}
+    return {"similar_posts": top_n_sentences}
 
 
 def update_corpus():

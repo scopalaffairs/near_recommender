@@ -81,4 +81,4 @@ def get_trending_users() -> str:
         columns={'signer_id': 'user_name', 'louvain_community': 'com_ID'}, inplace=True
     )
 
-    return trending_users_df[['user_name', 'com_ID']].to_json()
+    return {"trending_users": trending_users_df[['user_name', 'com_ID']].to_json()}

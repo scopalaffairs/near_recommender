@@ -51,7 +51,7 @@ def get_similar_tags_users(idx: int, top_k: int = 5) -> List[Dict[str, List[str]
     similar_users = find_similar_users(profiles, col_agg_tags, idx, top_k)
     response_dict = json.dumps(
         {
-            "similar_users": [
+            "similar_tags": [
                 {
                     "signer_id": item['similar_profile']['signer_id'],
                     "similarity_score": item['score'],
