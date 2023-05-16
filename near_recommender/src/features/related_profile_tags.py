@@ -4,9 +4,11 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from near_recommender.src.features.utils import get_index_from_signer_id
+
 
 def find_similar_users(
-    profiles: pd.DataFrame, col_agg_tags: str, idx: int, top_k: int
+    profiles: pd.DataFrame, col_agg_tags: str, user: str, top_k: int
 ) -> List[Dict[str, any]]:
     """
     Given a DataFrame of user profiles, a column name for aggregated tags, an index for the target user,
@@ -15,7 +17,7 @@ def find_similar_users(
 
     :param profiles: a DataFrame of user profiles.
     :param col_agg_tags: a string representing the column name for the aggregated tags.
-    :param idx: an integer representing the index of the target user.
+    :param user: a str representing the target user.
     :param top_k: an integer representing the number of similar users to return.
     :return: List[Dict[str, any]], a list of k user profiles similar to the target user, along with their similarity scores.
     Each user profile is represented as a dictionary with two keys: "score" and "similar_profile". The value
@@ -23,6 +25,7 @@ def find_similar_users(
     and the similar user.
     :raises: ValueError: If the value of idx is invalid or if no similar users are found for the given input.
     """
+    idx = get_index_from_signer_id(user, profiles)
     vectorizer = CountVectorizer(analyzer=lambda x: x)
     tag_matrix = vectorizer.fit_transform(profiles[col_agg_tags])
     cosine_sim = cosine_similarity(tag_matrix)

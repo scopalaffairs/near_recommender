@@ -31,3 +31,10 @@ def filter_last_post(signer_id):
     filtered_df = df[df['signer_id'] == signer_id]
 
     return filtered_df
+
+
+def get_index_from_signer_id(signer_id, dataset):
+    idx = dataset[dataset['signer_id'] == signer_id].index
+    if len(idx) > 0:
+        return idx[0]
+    raise ValueError(f"Signer ID {signer_id} not found in the dataset.")

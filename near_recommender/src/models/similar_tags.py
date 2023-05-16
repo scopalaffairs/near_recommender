@@ -23,12 +23,11 @@ result = spark.sql(tags_query)
 data = result.toPandas()
 
 
-def get_similar_tags_users(idx: int, top_k: int = 5) -> List[Dict[str, List[str]]]:
+def get_similar_tags_users(user: str, top_k: int = 5) -> List[Dict[str, List[str]]]:
     """Returns the top-k users with similar tags as the specified user.
 
     Args:
-        idx (int): The index of the user for whom similar users are to be found.
-        data (str): The query to fetch data from the database, SQL from table.
+        user (str): The name of the user for whom similar users are to be found.
         top_k (int, optional): The number of similar users to be returned. Defaults to 5.
 
     Returns:
@@ -48,7 +47,7 @@ def get_similar_tags_users(idx: int, top_k: int = 5) -> List[Dict[str, List[str]
     profiles[col_agg_tags] = profiles[col_agg_tags].apply(
         lambda x: [word for sublist in x for word in sublist.split()]
     )
-    similar_users = find_similar_users(profiles, col_agg_tags, idx, top_k)
+    similar_users = find_similar_users(profiles, col_agg_tags, user, top_k)
     response_dict = json.dumps(
         {
             "similar_tags": [
