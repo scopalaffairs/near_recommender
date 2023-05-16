@@ -3,73 +3,50 @@
 
 
 import json
-from datetime import datetime, timedelta
 from typing import Dict, List
-
-import boto3
+import pandas as pd
 
 from near_recommender.src.models.friends_friends import get_friends_of_friends
 from near_recommender.src.models.similar_posts import get_similar_post_users
 from near_recommender.src.models.similar_tags import get_similar_tags_users
 from near_recommender.src.models.trending_users import get_trending_users
 
-access_key = dbutils.secrets.get(scope="aws", key="access-key")
-secret_key = dbutils.secrets.get(scope="aws", key="secret-access-key")
-region_name = 'eu-central-1'
 
-
-def get_recommendations(users: List[Dict[str, any]]) -> None:
+def get_recommendations_per_user(idx: int, user: pd.Series) -> List[Dict]:
     """
-    Runs a recommendation system and writes recommendations for each user to a JSON file in an S3 bucket.
+    Gets all applicable recommendations for a given user.
 
     Recommendation system logic:
-        - If the user is new (< 1 week, < 3 days): returns trending users
-        - If the user is not active: returns trending users
-        - If the user is active: returns friends-of-friends
-        - If the user has a tag: returns tag similarity
-        - If the user has posted: returns post similarity
-        - If the user was inactive for some period: returns trending users
+        - If the user is new (< 1 week, < 3 days): appends trending users
+        - If the user is not active: appends trending users
+        - If the user is active: appends friends-of-friends
+        - If the user has a tag: appends tag similarity
+        - If the user has posted: appends post similarity
+        - If the user was inactive for some period: appends trending users
 
-    Writes a JSON file to an S3 bucket containing a dictionary with user IDs as keys and recommended users as values.
+    Returns a list of dictionaries with signer_id and recommended users.
     """
-    s3 = boto3.client('s3')
-    bucket_name = 'near-public-lakehouse'
+    recommendations = []
+    if user["address_age"] < 7:
+        print(f"new user age < 7: {user['signer_id']}")
+        trending_users = get_trending_users()
+        recommendations.append(trending_users)
+    elif user["active_last_month"]:
+        print(f"inactive user: {user['signer_id']}")
+        trending_users = get_trending_users()
+        recommendations.append(trending_users)
+    if user["user_has_tags"]:
+        print(f"user has tags: {user['signer_id']}")
+        similar_tags = get_similar_tags_users(idx, top_k=15)
+        recommendations.append(similar_tags)
+    if user["user_has_posted"]:
+        print(f"user posted: {user['signer_id']}")
+        query = """sample string, get actual post string, last one"""
+        similar_post = get_similar_post_users(query, top_k=15)
+        recommendations.append(similar_post)
+    else:
+        print("friends of friends")
+        # recommendations = get_friends_of_friends(idx)
+    print(f"{recommendations=}")
 
-    today = datetime.today().date()
-    trending_days = 7
-    inactive_days = 30
-
-    for user in users:
-        created_date = datetime.strptime(user['created_at'], '%Y-%m-%d').date()
-        if (today - created_date).days < 7:
-            if (today - created_date).days < 3:
-                recommendations = get_trending_users(top_k=5)
-            else:
-                recommendations = get_trending_users(top_k=3)
-        else:
-            last_active_date = datetime.strptime(
-                user['last_active_at'], '%Y-%m-%d'
-            ).date()
-            if (today - last_active_date).days > inactive_days:
-                recommendations = get_trending_users(top_k=5)
-            else:
-                if user.get('tags'):
-                    data = f"SELECT * FROM users WHERE user_id='{user['id']}'"
-                    recommendations = get_similar_tags_users(user['id'], data, top_k=5)
-                elif user.get('posts'):
-                    query = user['posts']
-                    recommendations = get_similar_post_users(
-                        query, model_embedder, corpus_embeddings, top_k, sentences, df
-                    )
-                else:
-                    recommendations = get_friends_of_friends(user['id'], top_k=5)
-
-        filename = f"{user['id']}_recommendations.json"
-        s3.put_object(
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            region_name=region_name,
-            Bucket=bucket_name,
-            Key=filename,
-            Body=json.dumps(recommendations)
-        )
+    return recommendations
