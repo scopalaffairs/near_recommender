@@ -23,6 +23,7 @@ sphinx = "^7.0.1"
 torch = "^2.0.1"
 transformers = "^4.29.1"
 xgboost = "^1.7.5"
+nltk = "^3.8.1"
 
 [tool.poetry.group.dev-dependencies.dependencies]
 ipython = "^8.13.2"
