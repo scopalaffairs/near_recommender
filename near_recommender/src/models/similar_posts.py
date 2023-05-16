@@ -2,6 +2,7 @@
 # (c) scopalaffairs 2023 - present.
 
 
+from functools import lru_cache
 from typing import List, Tuple
 
 from pyspark.sql import SparkSession
@@ -23,6 +24,14 @@ result = spark.sql(posts_query)
 data = result.toPandas()
 
 
+@lru_cache(maxsize=1)
+def load_corpus_embeddings(filename):
+    embedder = SentenceTransformer(model)
+    df, sentences = get_dataframe(data, col_source, col_target, remove_links=True)
+    corpus_embeddings = load_pretrained_model(filename)
+    return corpus_embeddings, sentences, df
+
+
 def get_similar_post_users(
     query: str, data: str = data, top_k: int = 5
 ) -> List[Tuple[str, float, str, str]]:
@@ -36,9 +45,7 @@ def get_similar_post_users(
     Returns:
         dict: A dictionary containing the top-k most similar sentences to the query.
     """
-    embedder = SentenceTransformer(model)
-    df, sentences = get_dataframe(data, col_source, col_target, remove_links=True)
-    corpus_embeddings = load_pretrained_model(filename)
+    corpus_embeddings, sentences, df = load_corpus_embeddings(filename)
     top_n_sentences = return_similar_sentences(
         query=query,
         model_embedder=embedder,
