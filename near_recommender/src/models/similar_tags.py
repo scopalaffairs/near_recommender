@@ -2,13 +2,14 @@
 # (c) scopalaffairs 2023 - present.
 
 
+import json
 from typing import Dict, List
 
 from pyspark.sql import SparkSession
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from near_recommender.src.data import get_dataframe
+from near_recommender.src.data.get_dataframe import get_dataframe
 from near_recommender.src.data.queries.query_get_profile_tags import query as tags_query
 from near_recommender.src.features.related_profile_tags import find_similar_users
 
@@ -53,7 +54,7 @@ def get_similar_tags_users(idx: int, top_k: int = 5) -> List[Dict[str, List[str]
             "similar_users": [
                 {
                     "signer_id": item['similar_profile']['signer_id'],
-                    "similarity_score": item['score']
+                    "similarity_score": item['score'],
                 }
                 for item in similar_users
             ]

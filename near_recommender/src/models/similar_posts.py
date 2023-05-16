@@ -29,7 +29,7 @@ def load_corpus_embeddings(filename):
     embedder = SentenceTransformer(model)
     df, sentences = get_dataframe(data, col_source, col_target, remove_links=True)
     corpus_embeddings = load_pretrained_model(filename)
-    return corpus_embeddings, sentences, df
+    return corpus_embeddings, sentences, df, embedder
 
 
 def get_similar_post_users(
@@ -45,7 +45,7 @@ def get_similar_post_users(
     Returns:
         dict: A dictionary containing the top-k most similar sentences to the query.
     """
-    corpus_embeddings, sentences, df = load_corpus_embeddings(filename)
+    corpus_embeddings, sentences, df, embedder = load_corpus_embeddings(filename)
     top_n_sentences = return_similar_sentences(
         query=query,
         model_embedder=embedder,
