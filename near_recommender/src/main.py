@@ -46,8 +46,10 @@ def get_recommendations_per_user(
     if user["user_has_posted"]:
         print(f"user posted: {user['signer_id']}")
         post = filter_last_post(user["signer_id"])
-        similar_post = get_similar_post_users(post.values[0], top_k=top_k)
-        recommendations.append(similar_post)
+        if len(post) > 0:
+            string_value = post.values[0]
+            similar_post = get_similar_post_users(string_value, top_k=top_k)
+            recommendations.append(similar_post)
     else:
         print("friends of friends")
         # recommendations = get_friends_of_friends(idx)
