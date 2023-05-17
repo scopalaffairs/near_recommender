@@ -152,7 +152,7 @@ html_show_copyright = True
 # base URL from which the finished HTML is served.
 # html_use_opensearch = ''
 
-html_baseurl = '/'
+html_baseurl = '/near_recommender/'
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 # html_file_suffix = None
