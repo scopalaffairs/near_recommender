@@ -32,7 +32,7 @@ def get_similar_tags_users(
     :type user: str
     :param top_k: The number of similar users to be returned. Defaults to 5.
     :type top_k: int, optional
-    :return: A dictionary containing the top-k similar users and their tags.
+    :return: A dictionary containing the top-k similar users and their similarity score.
     :rtype: Dict[str, List[Dict[str, str]]]
     :raises ValueError: If the input dataframe is empty or contains NaN values.
     :raises TypeError: If the input top_k value is not an integer.

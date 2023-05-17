@@ -16,7 +16,7 @@ from near_recommender.src.features.utils import *
 
 model = "all-mpnet-base-v2"
 path = "/dbfs/FileStore/models/"
-filename = path + f"corpus_embeddings_{model}.pickle"
+filename = path + f"corpus_embeddings_{model}"
 col_source = "post_text"
 col_target = "clean_text"
 

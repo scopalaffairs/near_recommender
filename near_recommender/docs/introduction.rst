@@ -8,3 +8,6 @@ Users own their data, and developers can create permissionless open-source apps,
 Visit `NEAR Social`_ 
 
 .. _NEAR Social: https://near.org
+
+.. include:: overview.rst
+

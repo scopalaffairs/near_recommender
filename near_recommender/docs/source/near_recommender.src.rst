@@ -14,10 +14,18 @@ Subpackages
 Submodules
 ----------
 
-near\_recommender.main module
----------------------------------
+near\_recommender.recommender module
+------------------------------------
 
-.. automodule:: near_recommender.src.main
+.. automodule:: near_recommender.src.recommender
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+near\_recommender.process_recommendations module
+------------------------------------------------
+
+.. automodule:: near_recommender.src.process_recommendations
    :members:
    :undoc-members:
    :show-inheritance:

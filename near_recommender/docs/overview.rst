@@ -1,16 +1,30 @@
-Quickstart
-===============
+Overview
+---------
 
-This is where you describe how to get set up on a clean install, including the
-commands necessary to get the raw data (using the `sync_data_from_s3` command,
-for example), and then how to make the cleaned, final data sets.
+Our objective was to develop a user recommendation system that fosters network growth by connecting users with similar interests. To achieve this, we designed a system that utilizes on-chain data for each user. We employed four distinct recommendation algorithms, as illustrated in the architectural overview below:
 
-The following scripts can be scheduled for repeated updates
+- Top trending users
 
-```
-process_recommendations()
-```
+- Friends of friends
 
-```
-update_corpus()
-```
+- Tag similarity
+
+- Post similarity
+
+
+
+
+
+.. include:: architecture.rst
+
+.. include:: commands.rst
+
+.. include:: models.rst
+
+.. include:: data.rst
+
+
+.. toctree::
+   :maxdepth: 2
+
+   source/near_recommender.rst

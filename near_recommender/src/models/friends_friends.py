@@ -21,8 +21,10 @@ def get_friends_of_friends(spark_df_path: str) -> Dict:
 
     :param spark_df_path: The path to the CSV file containing the input data for the Spark DataFrame.
     :type spark_df_path: str
+
     :return: A dictionary containing the predicted users as a NumPy array.
-    :rtype: dict
+    :rtype: Dict
+
     """
 
     spark_df = (

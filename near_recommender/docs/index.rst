@@ -8,10 +8,6 @@ Contents:
     :maxdepth: 2
 
     introduction
-    overview
-    architecture
-    functions
-    algorithms
 
 
 Indices and tables

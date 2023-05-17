@@ -14,7 +14,7 @@ import sys
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ["sphinx.ext.autodoc"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.intersphinx"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -66,7 +66,7 @@ exclude_patterns = ['_build']
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-# show_authors = False
+show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -197,37 +197,3 @@ latex_documents = [
 
 # If false, no module index is generated.
 # latex_domain_indices = True
-
-
-# -- Options for manual page output --------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'california-housing-prediction', u'california-housing-prediction Documentation',
-     [u"Marie Bocher"], 1)
-]
-
-# If true, show URL addresses after external links.
-# man_show_urls = False
-
-
-# -- Options for Texinfo output ------------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    ('index', 'california-housing-prediction', u'california-housing-prediction Documentation',
-     u"Marie Bocher", 'california-housing-prediction',
-     'A short description of the project.', 'Miscellaneous'),
-]
-
-# Documents to append as an appendix to all manuals.
-# texinfo_appendices = []
-
-# If false, no module index is generated.
-# texinfo_domain_indices = True
-
-# How to display URL addresses: 'footnote', 'no', or 'inline'.
-# texinfo_show_urls = 'footnote'
