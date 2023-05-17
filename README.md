@@ -24,7 +24,7 @@ This project was done in collaboration with [Pagoda](https://www.pagoda.co/), a 
 
 ## Documentation
 
-(Documentation)[https://scopalaffairs.github.io/near_recommender/]
+[Documentation](https://scopalaffairs.github.io/near_recommender/)
 
 ### Introduction
 
