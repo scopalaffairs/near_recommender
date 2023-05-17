@@ -1,19 +1,30 @@
 # NEAR Recommender System
 
+**Index**
+
+1. [NEAR Social](#near-social)
+2. [Documentation](#documentation)
+3. [Introduction](#introduction)
+4. [Task](#task)
+5. [Result](#result)
+6. [Technical details](#technical-details)
+7. [Methodologies](#methodologies)
+   - [SQL queries](#sql-queries)
+   - [Notebooks](#notebooks)
+8. [Widget](#widget)
+9. [Visualization](#visualization)
+10. [Authors](#authors)
+
+
 This repository contains the files used for the Capstone Project "NEAR Social Recommender - A recommender system for an on-chain social network" of the Data Science Bootcamp , Batch 03/2023 at Constructor.
 
 This project was done in collaboration with [Pagoda](https://www.pagoda.co/), a software development company behind the NEAR Blockchain Operating System.
 
-### Authors
-
-[Agustin Rojo Serrano](https://www.linkedin.com/in/rojoserrano/)
-
-[Christian Kühner](https://www.linkedin.com/in/christian-k%C3%BChner-9295301b1/)
-
-[Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/)
-
-
 ## NEAR Social
+
+## Documentation
+
+[Documentation](https://scopalaffairs.github.io/near_recommender/)
 
 ### Introduction
 
@@ -69,7 +80,7 @@ Several notebooks inside and outside Databricks have been created to implement t
 
 ## Widget
 
-The recommender system has been implemented as a widget. This can be found under `widget_name`
+The recommender system is going to be implemented as a widget.
 
 
 ## Visualization
@@ -77,3 +88,12 @@ The recommender system has been implemented as a widget. This can be found under
 Unveiling the web of network connections and community clusters, several iterations of visual interfaces gave us a comprehensive understanding of user relationships, facilitating trending user recommendations and fine tuning the models.
 
 ![Visualization of the near social network and its clusters](near_recommender/docs/images/near_network_graph_still.png)
+
+
+### Authors
+
+[Agustin Rojo Serrano](https://www.linkedin.com/in/rojoserrano/)
+
+[Christian Kühner](https://www.linkedin.com/in/christian-k%C3%BChner-9295301b1/)
+
+[Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/)
