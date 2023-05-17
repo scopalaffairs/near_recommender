@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
-        <link rel="canonical" href="/docs/models.html" />
+        <link rel="canonical" href="/overview.html" />
 
     <!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
-        <title>Models - near-recommender 0.1 documentation</title>
+        <title>Overview - near-recommender 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -212,17 +212,68 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="models">
-<h1>Models<a class="headerlink" href="#models" title="Permalink to this heading">#</a></h1>
+          <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<p>Our objective was to develop a user recommendation system that fosters network growth by connecting users with similar interests. To achieve this, we designed a system that utilizes on-chain data for each user. We employed four distinct recommendation algorithms, as illustrated in the architectural overview below:</p>
+<ul class="simple">
+<li><p>Top trending users</p></li>
+<li><p>Friends of friends</p></li>
+<li><p>Tag similarity</p></li>
+<li><p>Post similarity</p></li>
+</ul>
+</section>
+<section id="system">
+<h1>System<a class="headerlink" href="#system" title="Permalink to this heading">#</a></h1>
+<p>This section describes the overall architecture of the recommender system, including the flow of data and the different recommendation algorithms utilized.</p>
+<dl class="simple">
+<dt>Recommendation system logic:</dt><dd><ul class="simple">
+<li><p>If the user is new (&lt; 1 week, &lt; 3 days): appends trending users</p></li>
+<li><p>If the user is not active: appends trending users</p></li>
+<li><p>If the user is active: appends friends-of-friends</p></li>
+<li><p>If the user has a tag: appends tag similarity</p></li>
+<li><p>If the user has posted: appends post similarity</p></li>
+<li><p>If the user was inactive for some period: appends trending users</p></li>
+</ul>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/Architecture.png"><img alt="Recommender System Architectural Overview" class="align-center" src="_images/Architecture.png" style="width: 800px;" /></a>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">#</a></h2>
+<p>This section provides details about the functions the models use for their recommendations.</p>
+<p>Along with the main recommender functions, we expose commands that can be scheduled for repeating updates.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_recommendations_per_user()</span></code></p></li>
+</ul>
+<p>See <code class="docutils literal notranslate"><span class="pre">near_recommender/src/process_recommendations.py</span></code> for reference on how to use the main logic, pushing updated JSON objects for each user to an S3 bucket.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">update_corpus()</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">update_corpus</span></code> command is responsible for updating the locally stored Large Language Model, which is defined in the <code class="docutils literal notranslate"><span class="pre">path</span></code> variable within the <code class="docutils literal notranslate"><span class="pre">similar_posts</span></code> module.</p>
+<p>Each update in the pooled word embeddings model triggers an increment in its version number.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">load_pretrained_model</span></code>, which is used in <code class="docutils literal notranslate"><span class="pre">similar_posts</span></code>, handles loading the latest version.</p>
+<div class="important admonition">
+<p class="admonition-title">Machine Learning Model Management</p>
+<p>Feel free to optimize this with your own version management for machine learning models.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.features.html">near_recommender.src.features package</a></li>
+</ul>
+</div>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this heading">#</a></h2>
 <p>This section provides details about the machine learning models and algorithms used in the recommender system.</p>
+</section>
+</section>
 <section id="trending-users">
-<h2>Trending Users<a class="headerlink" href="#trending-users" title="Permalink to this heading">#</a></h2>
+<h1>Trending Users<a class="headerlink" href="#trending-users" title="Permalink to this heading">#</a></h1>
 <p>The trending users algorithm appends the top trending users to the recommendation list. This method is applied in the following cases:</p>
 <ul class="simple">
 <li><p>If the user is new (&lt; 1 week, &lt; 3 days)</p></li>
@@ -245,7 +296,7 @@
 
 </section>
 <section id="friends-of-friends">
-<h2>Friends-of-Friends<a class="headerlink" href="#friends-of-friends" title="Permalink to this heading">#</a></h2>
+<h1>Friends-of-Friends<a class="headerlink" href="#friends-of-friends" title="Permalink to this heading">#</a></h1>
 <p>The friends-of-friends algorithm appends users who are friends-of-friends to the recommendation list.
 This model is applied when the user is active.</p>
 <span class="target" id="module-near_recommender.src.models.friends_friends"></span><dl class="py function">
@@ -267,7 +318,7 @@ This model is applied when the user is active.</p>
 
 </section>
 <section id="similar-posts">
-<h2>Similar Posts<a class="headerlink" href="#similar-posts" title="Permalink to this heading">#</a></h2>
+<h1>Similar Posts<a class="headerlink" href="#similar-posts" title="Permalink to this heading">#</a></h1>
 <p>The similar posts model appends users who have made similar posts to the recommendation list.
 This model is applied when the user has posted.</p>
 <span class="target" id="module-near_recommender.src.models.similar_posts"></span><dl class="py function">
@@ -324,7 +375,7 @@ The model is saved to the location specified in the <cite>path</cite> variable.<
 
 </section>
 <section id="similar-profile-tags">
-<h2>Similar Profile Tags<a class="headerlink" href="#similar-profile-tags" title="Permalink to this heading">#</a></h2>
+<h1>Similar Profile Tags<a class="headerlink" href="#similar-profile-tags" title="Permalink to this heading">#</a></h1>
 <p>The similar profile tags algorithm appends users who have similar profile tags to the recommendation list.
 This algorithm is applied when the user has specified tags.</p>
 <span class="target" id="module-near_recommender.src.models.similar_tags"></span><dl class="py function">
@@ -358,6 +409,23 @@ This algorithm is applied when the user has specified tags.</p>
 <li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.models.html">near_recommender.src.models package</a></li>
 </ul>
 </div>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h2>
+<p>This section provides details about the queries used to feed the models.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.data.html">near_recommender.src.data package</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/near_recommender.html">near_recommender package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/near_recommender.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/near_recommender.html#module-near_recommender">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </section>
 
@@ -386,44 +454,8 @@ This algorithm is applied when the user has specified tags.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Models</a><ul>
-<li><a class="reference internal" href="#trending-users">Trending Users</a><ul>
-<li><a class="reference internal" href="#near_recommender.src.models.trending_users.get_trending_users"><code class="docutils literal notranslate"><span class="pre">get_trending_users()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#friends-of-friends">Friends-of-Friends</a><ul>
-<li><a class="reference internal" href="#near_recommender.src.models.friends_friends.get_friends_of_friends"><code class="docutils literal notranslate"><span class="pre">get_friends_of_friends()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#similar-posts">Similar Posts</a><ul>
-<li><a class="reference internal" href="#near_recommender.src.models.similar_posts.get_similar_post_users"><code class="docutils literal notranslate"><span class="pre">get_similar_post_users()</span></code></a></li>
-<li><a class="reference internal" href="#near_recommender.src.models.similar_posts.load_corpus_embeddings"><code class="docutils literal notranslate"><span class="pre">load_corpus_embeddings()</span></code></a></li>
-<li><a class="reference internal" href="#near_recommender.src.models.similar_posts.update_corpus"><code class="docutils literal notranslate"><span class="pre">update_corpus()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#similar-profile-tags">Similar Profile Tags</a><ul>
-<li><a class="reference internal" href="#near_recommender.src.models.similar_tags.get_similar_tags_users"><code class="docutils literal notranslate"><span class="pre">get_similar_tags_users()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

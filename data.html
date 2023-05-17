@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
-        <link rel="canonical" href="/docs/commands.html" />
+        <link rel="canonical" href="/data.html" />
 
     <!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
-        <title>Commands - near-recommender 0.1 documentation</title>
+        <title>Data - near-recommender 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -218,27 +218,12 @@
           </label>
         </div>
         <article role="main">
-          <section id="commands">
-<h1>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">#</a></h1>
-<p>This section provides details about the functions the models use for their recommendations.</p>
-<p>Along with the main recommender functions, we expose commands that can be scheduled for repeating updates.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">get_recommendations_per_user()</span></code></p></li>
-</ul>
-<p>See <code class="docutils literal notranslate"><span class="pre">near_recommender/src/process_recommendations.py</span></code> for reference on how to use the main logic, pushing updated JSON objects for each user to an S3 bucket.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">update_corpus()</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">update_corpus</span></code> command is responsible for updating the locally stored Large Language Model, which is defined in the <code class="docutils literal notranslate"><span class="pre">path</span></code> variable within the <code class="docutils literal notranslate"><span class="pre">similar_posts</span></code> module.</p>
-<p>Each update in the pooled word embeddings model triggers an increment in its version number.</p>
-<p>The function <code class="docutils literal notranslate"><span class="pre">load_pretrained_model</span></code>, which is used in <code class="docutils literal notranslate"><span class="pre">similar_posts</span></code>, handles loading the latest version.</p>
-<div class="important admonition">
-<p class="admonition-title">Machine Learning Model Management</p>
-<p>Feel free to optimize this with your own version management for machine learning models.</p>
-</div>
+          <section id="data">
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h1>
+<p>This section provides details about the queries used to feed the models.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.features.html">near_recommender.src.features package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.data.html">near_recommender.src.data package</a></li>
 </ul>
 </div>
 </section>
