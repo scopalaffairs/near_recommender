@@ -1,3 +1,5 @@
+from typing import Dict
+
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -13,13 +15,14 @@ from near_recommender.src.data.queries.query_get_trending_users import (
 spark = SparkSession.builder.getOrCreate()
 
 
-def get_trending_users() -> str:
+def get_trending_users() -> Dict:
     """
     Retrieves trending users based on specified metrics and community detection algorithms.
 
-    Returns:
-        A JSON object containing the usernames and community IDs of the top 20 trending users.
+    :return: A JSON object containing the usernames and community IDs of the top 20 trending users.
+    :rtype: Dict
     """
+
     follows_df = spark.sql(follows_query).toPandas()
     metrics_df = spark.sql(metrics_query).toPandas().fillna(0)
 

@@ -3,6 +3,7 @@
 
 
 import json
+import os
 from typing import Dict, List
 
 from pyspark.sql import SparkSession
@@ -19,25 +20,26 @@ col_target = "tags"
 col_agg_tags = "aggregated_tags"
 
 spark = SparkSession.builder.getOrCreate()
-result = spark.sql(tags_query)
-data = result.toPandas()
 
 
-def get_similar_tags_users(user: str, top_k: int = 5) -> List[Dict[str, List[str]]]:
-    """Returns the top-k users with similar tags as the specified user.
-
-    Args:
-        user (str): The name of the user for whom similar users are to be found.
-        top_k (int, optional): The number of similar users to be returned. Defaults to 5.
-
-    Returns:
-        dict: A dictionary containing the top-k similar users and their similarity scores.
-
-    Raises:
-        ValueError: If the input dataframe is empty or contains NaN values.
-        TypeError: If the input top_k value is not an integer.
-
+def get_similar_tags_users(
+    user: str, top_k: int = 5
+) -> Dict[str, List[Dict[str, str]]]:
     """
+    Returns the top-k users with similar tags as the specified user.
+
+    :param user: The name of the user for whom similar users are to be found.
+    :type user: str
+    :param top_k: The number of similar users to be returned. Defaults to 5.
+    :type top_k: int, optional
+    :return: A dictionary containing the top-k similar users and their tags.
+    :rtype: Dict[str, List[Dict[str, str]]]
+    :raises ValueError: If the input dataframe is empty or contains NaN values.
+    :raises TypeError: If the input top_k value is not an integer.
+    """
+
+    result = spark.sql(tags_query)
+    data = result.toPandas()
 
     tags, _ = get_dataframe(data, col_source, col_target)
     tags.dropna(subset=col_source).copy()

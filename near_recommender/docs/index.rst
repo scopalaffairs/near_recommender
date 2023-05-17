@@ -5,16 +5,16 @@ NEAR Recommender System Documentation
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   getting-started
-   commands
-
+    introduction
+    overview
+    architecture
+    functions
+    algorithms
 
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

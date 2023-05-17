@@ -12,7 +12,7 @@ def return_similar_sentences(
     top_k: int,
     df: pd.DataFrame,
     sentences: List[str],
-) -> List[Tuple[str, float, str, str]]:
+) -> List[Tuple[str, float, str, pd.Series]]:
     """
     Returns the top k most similar sentences in the corpus to the given query, along with their similarity scores,
     associated DataFrame row, and username.

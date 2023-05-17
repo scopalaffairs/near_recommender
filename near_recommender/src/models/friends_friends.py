@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 
 import mlflow
 import mlflow.sklearn
@@ -14,15 +15,14 @@ spark = SparkSession.builder.getOrCreate()
 spark_df_path = "/FileStore/tables/active_user_follow_matrix.csv"
 
 
-def get_friends_of_friends(spark_df_path):
+def get_friends_of_friends(spark_df_path: str) -> Dict:
     """
     Reads a CSV file as a Spark DataFrame and trains an XGBoost model to predict user connections.
 
-    Args:
-        spark_df_path (str): The path to the CSV file containing the input data for the Spark DataFrame.
-
-    Returns:
-        dict: A dictionary containing the predicted users as a NumPy array.
+    :param spark_df_path: The path to the CSV file containing the input data for the Spark DataFrame.
+    :type spark_df_path: str
+    :return: A dictionary containing the predicted users as a NumPy array.
+    :rtype: dict
     """
 
     spark_df = (
