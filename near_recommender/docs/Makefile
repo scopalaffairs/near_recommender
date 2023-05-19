@@ -1,11 +1,11 @@
 # Makefile for Sphinx documentation
-#
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
-BUILDDIR      = _build
+BUILDDIR      = ../../docs
+SPHINXAUTO    = source/ 
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -45,6 +45,9 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+auto:
+	sphinx-apidoc -o $(SPHINXAUTO) ../near_recommender/
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
