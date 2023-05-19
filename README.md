@@ -5,9 +5,9 @@
 
 1. [Documentation](#documentation)
 2. [NEAR Social](#near-social)
-3. [Introduction](#introduction)
-4. [Task](#task)
-5. [Result](#result)
+3. - [Introduction](#introduction)
+4. - [Task](#task)
+5. - [Result](#result)
 6. [Technical details](#technical-details)
 7. [Methodologies](#methodologies)
    - [SQL queries](#sql-queries)
@@ -126,7 +126,7 @@ Updates the entire project.
 
 `poetry build`
 
-Builds a wheel from the package.
+Builds a wheel from the package. This can be uploaded and installed in the designated runtime environment. 
 
 For more commands, consult the documentation provided by Poetry.
 
@@ -137,7 +137,7 @@ We rely on Databricks LTS support for the Python version. Please refer to the `p
 
 ### Compiling the Documentation
 
-The documentation is hosted on GitHub Pages from the docs branch, located in the /docs folder. To ensure smooth integration with GitHub, make sure to include an empty `.nojekyll` file in the compiled docs directory (project_root)/docs.
+The documentation is hosted on GitHub Pages from the docs branch, located in the /docs folder. To ensure smooth integration with GitHub, make sure to include an empty `.nojekyll` file in the compiled docs directory `(project_root)/docs`.
 
 To build the documentation, use the provided
 
