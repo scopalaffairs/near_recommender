@@ -18,7 +18,7 @@
 
 This repository contains the files used for the Capstone Project "NEAR Social Recommender - A recommender system for an on-chain social network" of the Data Science Bootcamp , Batch 03/2023 at Constructor.
 
-This project was done in collaboration with [Pagoda](https://www.pagoda.co/), a software development company behind the NEAR Blockchain Operating System.
+This project was done in collaboration with [Pagoda](https://www.pagoda.co/), the software development company behind the NEAR Blockchain Operating System.
 
 ## NEAR Social
 
@@ -62,6 +62,8 @@ Among others, we explored the given datasets with the following methods:
 - Tag/Post Similarity
   - Natural Language Processing, Cosine Similarity
   - Pooled word embeddings on Large Transformer Model, Cosine Similarity
+- Hyperlink-Induced-Topic-Search (HITS) Algorithm
+  - Graphs for visualization and exploration
 
 ### SQL queries
 
@@ -89,6 +91,53 @@ Unveiling the web of network connections and community clusters, several iterati
 
 ![Visualization of the near social network and its clusters](near_recommender/docs/images/near_network_graph_still.png)
 
+
+## Documentation
+
+The documentation is hosted via Github Pages from the branch `docs`, folder `/docs`.
+To work smoothly with Github, we need an empty `.nojekyll` file in the compiled docs directory `(project_root)/docs`.
+
+To build the docs, we can use the make script in the documentation source directory, `near_recommender/docs/`.
+
+To build the docs from scratch, you need to have a Java runtime on your local machine, and have the packages virtualenvironment activated. See `Development` for further steps.
+
+
+## Development
+
+1. Package Management
+
+This package is managed by `Poetry` ![Python Poetry Package Management](https://python-poetry.org/docs/)
+
+You need the tool installed to interact with its interface.
+
+Basic commands:
+
+`poetry shell`
+
+Activates a virtualenv for this project.
+
+`poetry install`
+
+Installs the requirements into the virtualenv.
+
+`poetry add/remove <package>`
+
+Installs/removes packages. Poetry handles dependency version management automatically. Keep in mind to let the tool handle dependencies by using the above commands, instead of manually changing versions.
+
+Specific versions for a package can be installed by adding the version, see: https://python-poetry.org/docs/dependency-specification
+
+`poetry update`
+
+Updates the entire project.
+
+`poetry build`
+Builds a wheel from the package.
+
+For further commands, consult poetry's docs.
+
+2. Python Version
+
+We are depending on Databricks LTS support for the Python version, check `pyproject.toml` for further information. 
 
 ### Authors
 
