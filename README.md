@@ -24,7 +24,8 @@ This project was done in collaboration with [Pagoda](https://www.pagoda.co/), th
 
 ## Documentation
 
-For a more detailed information about the codebase, please refer to the [Documentation](https://scopalaffairs.github.io/near_recommender/).
+For more detailed information about the codebase, 
+please refer to the [Documentation](https://scopalaffairs.github.io/near_recommender/).
 
 
 ## NEAR Social
