@@ -1,3 +1,30 @@
+.copy-code {
+  position: relative;
+}
+
+.copy-code button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.copy-code code {
+  position: relative;
+  display: block;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
 # NEAR Recommender System
 
 
@@ -167,28 +194,4 @@ To rebuild the documentation, you will need a Java runtime on your localhost and
 [Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/)
 
 
-.copy-code {
-  position: relative;
-}
 
-.copy-code button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  outline: none;
-}
-
-.copy-code code {
-  position: relative;
-  display: block;
-  padding: 10px;
-  background-color: #f7f7f7;
-  border-radius: 4px;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: 14px;
-  line-height: 1.5;
-}
