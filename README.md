@@ -99,7 +99,7 @@ Unveiling the web of network connections and community clusters, several iterati
 
 ### 1. Package Management
 
-This package is managed using `Poetry`, a Python package management tool. You can find more information about `Poetry` here ![Python Poetry Package Management](https://python-poetry.org/docs/)
+This package is managed using `Poetry`, a Python package management tool. You can find more information about `Poetry` here: ![Python Poetry](https://python-poetry.org/docs/)
 
 To interact with Poetry's interface, make sure you have it installed.
 
@@ -117,7 +117,7 @@ Installs the requirements into the virtualenv.
 
 Installs/removes packages. Poetry automatically handles dependency version management. It is recommended to use these commands instead of manually changing versions in `pyproject.toml`.
 
-Specific versions for a package can be installed by adding the version in PEP440 format. Refer to the dependency specification for more details: https://python-poetry.org/docs/dependency-specification
+Specific versions for a package can be installed by adding the version in ![PEP 440](https://peps.python.org/pep-0440/) format. Refer to the ![dependency specification](https://python-poetry.org/docs/dependency-specification) for more details.
 
 `poetry update`
 
