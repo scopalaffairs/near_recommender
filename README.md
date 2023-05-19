@@ -14,7 +14,8 @@
    - [Notebooks](#notebooks)
 8. [Widget](#widget)
 9. [Visualization](#visualization)
-10. [Authors](#authors)
+10. [Development](#development)
+12. [Authors](#authors)
 
 
 This repository contains the files used for the Capstone Project "NEAR Social Recommender - A recommender system for an on-chain social network" of the Data Science Bootcamp , Batch 03/2023 at Constructor.
@@ -96,7 +97,7 @@ Unveiling the web of network connections and community clusters, several iterati
 
 ## Development
 
-1. Package Management
+### 1. Package Management
 
 This package is managed using `Poetry`, a Python package management tool. You can find more information about `Poetry` here ![Python Poetry Package Management](https://python-poetry.org/docs/)
 
@@ -128,7 +129,7 @@ Builds a wheel from the package.
 
 For more commands, consult the documentation provided by Poetry.
 
-2. Python Version
+### 2. Python Version
 
 We rely on Databricks LTS support for the Python version. Please refer to the `pyproject.toml` file for further information.
 
