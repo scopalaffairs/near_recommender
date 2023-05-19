@@ -138,7 +138,22 @@ We rely on Databricks LTS support for the Python version. Please refer to the `p
 
 The documentation is hosted on GitHub Pages from the docs branch, located in the /docs folder. To ensure smooth integration with GitHub, make sure to include an empty `.nojekyll` file in the compiled docs directory (project_root)/docs.
 
-To build the documentation, use the provided make script located in the documentation source directory, `near_recommender/docs/`.
+To build the documentation, use the provided
+
+<div class="copy-code">
+  <button onclick="copyToClipboard(this)" title="Copy code">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path d="M9 2a1 1 0 0 1 1 1v2h4V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6h-2V6H4v12h8v2H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h6V2zm6 11h2v9h-2v-9zm-4-3h2v12h-2V10zm-4 3h2v9H7v-9zm8-8h2v6h-2V5z"/>
+    </svg>
+  </button>
+  <code>
+     make html
+  </code>
+</div>
+
+
+command in the documentation source directory, `near_recommender/docs/`.
 
 To rebuild the documentation, you will need a Java runtime on your localhost and the Poetry virtual environment activated.
 
@@ -150,3 +165,30 @@ To rebuild the documentation, you will need a Java runtime on your localhost and
 [Christian Kühner](https://www.linkedin.com/in/christian-k%C3%BChner-9295301b1/)
 
 [Daniel Herrmann](https://www.linkedin.com/in/daniel-herrmann/)
+
+
+.copy-code {
+  position: relative;
+}
+
+.copy-code button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.copy-code code {
+  position: relative;
+  display: block;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
