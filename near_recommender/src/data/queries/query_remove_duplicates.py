@@ -23,7 +23,7 @@ WITH duplicates AS (
     hive_metastore.mainnet.silver_near_social_txs_parsed
   WHERE
     method_name = 'set'
-  GROUP BY 
+  GROUP BY
     block_date
     , signer_id
     , receipt_id
@@ -37,7 +37,7 @@ WITH duplicates AS (
     , settings
     , badge
     , index
-  HAVING 
+  HAVING
     tx_count > 1
 )
 
@@ -61,7 +61,7 @@ WITH duplicates AS (
     hive_metastore.mainnet.silver_near_social_txs_parsed
   WHERE
     method_name = 'set'
-  GROUP BY 
+  GROUP BY
     block_date
     , signer_id
     , receipt_id
@@ -75,7 +75,7 @@ WITH duplicates AS (
     , settings
     , badge
     , index
-  HAVING 
+  HAVING
     tx_count = 1
 )
 

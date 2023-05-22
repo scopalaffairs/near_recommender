@@ -3,7 +3,7 @@
 # - signer_id
 # - user followed
 # - type (FOLLOW or UNFOLLOW)
-# - date 
+# - date
 
 query = """
 CREATE TABLE hive_metastore.sit.graph_follows AS (
@@ -22,10 +22,10 @@ CREATE TABLE hive_metastore.sit.graph_follows AS (
   )
 
   , single_user_follow AS (
-    SELECT 
+    SELECT
       signer_id
       , SUBSTRING(follow, CHARINDEX('"', follow) + 1, CHARINDEX('"', follow, CHARINDEX('"', follow) + 1) - CHARINDEX('"', follow) - 1) AS follows
-      , CASE 
+      , CASE
         WHEN CONTAINS(follow, 'null') THEN 'UNFOLLOW'
         ELSE 'FOLLOW'
         END AS type
@@ -37,11 +37,11 @@ CREATE TABLE hive_metastore.sit.graph_follows AS (
   )
 
   , batch_user_follow AS ( --coming from a batch following widget
-    SELECT 
+    SELECT
       signer_id
       , EXPLODE(SPLIT(follow, ',')) AS follow_explo
       , SUBSTRING(follow_explo, CHARINDEX('"', follow_explo) + 1, CHARINDEX('"', follow_explo, CHARINDEX('"', follow_explo) + 1) - CHARINDEX('"', follow_explo) - 1) AS follows
-      , CASE 
+      , CASE
         WHEN CONTAINS(follow_explo, 'null') THEN 'UNFOLLOW'
         ELSE 'FOLLOW'
         END AS type
@@ -51,7 +51,7 @@ CREATE TABLE hive_metastore.sit.graph_follows AS (
     WHERE
       CONTAINS(follow, ',')
   )
-    
+
   SELECT
     signer_id
     , follows
@@ -64,7 +64,7 @@ CREATE TABLE hive_metastore.sit.graph_follows AS (
     , follows
     , type
     , block_date
-  FROM 
+  FROM
     batch_user_follow
 )
 """

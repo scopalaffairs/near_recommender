@@ -22,9 +22,9 @@ WHERE
     , SUM(CASE WHEN type = 'like' THEN 1 ELSE 0 END) AS total_likes
     , SUM(CASE WHEN type = 'unlike' THEN 1 ELSE 0 END) AS unlikes
     , total_likes - unlikes AS likes
-  FROM 
+  FROM
     likes_raw
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 , likes_last_30d AS (
@@ -33,11 +33,11 @@ WHERE
     , SUM(CASE WHEN type = 'like' THEN 1 ELSE 0 END) AS total_likes
     , SUM(CASE WHEN type = 'unlike' THEN 1 ELSE 0 END) AS unlikes
     , total_likes - unlikes AS likes
-  FROM 
+  FROM
     likes_raw
   WHERE
     block_date > CURRENT_DATE - 30
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 
@@ -47,9 +47,9 @@ WHERE
     , SUM(CASE WHEN type = 'like' THEN 1 ELSE 0 END) AS total_likers
     , SUM(CASE WHEN type = 'unlike' THEN 1 ELSE 0 END) AS unlikers
     , total_likers - unlikers AS likers
-  FROM 
+  FROM
     likes_raw
-  GROUP BY 
+  GROUP BY
     likee
 )
 
@@ -59,11 +59,11 @@ WHERE
     , SUM(CASE WHEN type = 'like' THEN 1 ELSE 0 END) AS total_likers
     , SUM(CASE WHEN type = 'unlike' THEN 1 ELSE 0 END) AS unlikers
     , total_likers - unlikers AS likers
-  FROM 
+  FROM
     likes_raw
   WHERE
     block_date > CURRENT_DATE - 30
-  GROUP BY 
+  GROUP BY
     likee
 )
 
@@ -110,10 +110,10 @@ WHERE
 )
 
 , single_user_follow AS (
-  SELECT 
+  SELECT
     signer_id
     , SUBSTRING(follow, CHARINDEX('"', follow) + 1, CHARINDEX('"', follow, CHARINDEX('"', follow) + 1) - CHARINDEX('"', follow) - 1) AS follows
-    , CASE 
+    , CASE
       WHEN CONTAINS(follow, 'null') THEN 'UNFOLLOW'
       ELSE 'FOLLOW'
       END AS type
@@ -125,11 +125,11 @@ WHERE
 )
 
 , batch_user_follow AS ( --coming from a batch following widget
-  SELECT 
+  SELECT
     signer_id
     , explode(split(follow, ',')) AS follow_explo
     , SUBSTRING(follow_explo, CHARINDEX('"', follow_explo) + 1, CHARINDEX('"', follow_explo, CHARINDEX('"', follow_explo) + 1) - CHARINDEX('"', follow_explo) - 1) AS follows
-    , CASE 
+    , CASE
       WHEN CONTAINS(follow_explo, 'null') THEN 'UNFOLLOW'
       ELSE 'FOLLOW'
       END AS type
@@ -153,7 +153,7 @@ WHERE
     , follows
     , type
     , block_date
-  FROM 
+  FROM
     batch_user_follow
 )
 
@@ -165,7 +165,7 @@ WHERE
     , add_follows - unfollows AS following
   FROM
     total_user_follows
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 
@@ -179,7 +179,7 @@ WHERE
     total_user_follows
   WHERE
     block_date > CURRENT_DATE - 30
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 
@@ -231,7 +231,7 @@ WHERE
     net_user_follows
   WHERE
     follows_count IS NOT NULL OR net_count >= 1
-  GROUP BY 
+  GROUP BY
     follows
 )
 
@@ -243,7 +243,7 @@ WHERE
     net_user_follows_30d
   WHERE
     follows_count IS NOT NULL OR net_count >= 1
-  GROUP BY 
+  GROUP BY
     follows
 )
 
@@ -312,7 +312,7 @@ WHERE
     , CASE index_txs WHEN 0 THEN 0 ELSE 1 END AS used_index
   FROM
     hive_metastore.sit.near_social_txs_clean
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 
@@ -327,17 +327,17 @@ SELECT
     hive_metastore.sit.near_social_txs_clean
   WHERE
     block_date > CURRENT_DATE - 30
-  GROUP BY 
+  GROUP BY
     signer_id
 )
 
 , comments_30d AS (
-SELECT 
+SELECT
   SUBSTRING(post:comment:item:path, 0, CHARINDEX('/', post:comment:item:path) - 1) AS comment_to
   , COUNT (*) AS comments_30d
-FROM 
-  hive_metastore.sit.near_social_txs_clean 
-WHERE 
+FROM
+  hive_metastore.sit.near_social_txs_clean
+WHERE
   post:comment:item:type = 'social'
   AND block_date > CURRENT_DATE - 30
   AND SUBSTRING(post:comment:item:path, 0, CHARINDEX('/', post:comment:item:path) - 1) != signer_id
@@ -360,7 +360,7 @@ SELECT
   , m.days_active / m.address_age * 100 AS perc_active_days
   , lm.days_active AS days_active_30d
   , lm.posts AS posts_30d
-  , lm.posts / 30 AS post_per_day_30d 
+  , lm.posts / 30 AS post_per_day_30d
   , lm.days_active / 30 * 100 AS perc_active_days_30d
   , f.following
   , f.followers
@@ -383,7 +383,7 @@ ON
   m.signer_id = lm.signer_id
 LEFT JOIN
   follow_agg f
-ON 
+ON
   m.signer_id = f.signer_id
 LEFT JOIN
  follow_last_30d_agg ft
