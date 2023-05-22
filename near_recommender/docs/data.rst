@@ -65,7 +65,7 @@ Metrics can be divided into 3 categories:
 
     - Activity is calculated as the sum of posts, likes and followings in the past 30 days. There is a weighted variant using 1, 0.5 and 0.1 weights respectively.
 
-    - The treding metric is defined as the ratio between weighted engagement and weighted activity with the intention of selecting the users which create the most appealing content for the network.
+    - The trending metric is defined as the ratio between weighted engagement and weighted activity with the intention of selecting the users which create the most appealing content for the network.
 
 
 
