@@ -14,7 +14,7 @@ This query is used to remove duplicates from ``hive_metastore.mainnet.silver_nea
 
 The query utilizes two Common Table Expressions (CTEs) to handle transactions:
 
-- *'duplicates'* contains all transactions that are duplicated with a count of the number of times each one appears.
+- ``duplicates`` This CTE captures all transactions that are duplicated, along with a count indicating how many times each transaction appears.
 - *'unique_txs'* contains all unique transactions.
 
 By merging this two CTEs, we obtain a table without duplicates. This table is saved as *'hive_metastore.sit.near_social_txs_clean'*.
