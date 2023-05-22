@@ -10,7 +10,7 @@ SQL queries
 Remove duplicates query
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Query to remove duplicates from *'hive_metastore.mainnet.silver_near_social_txs_parsed'* table.
+This query is used to remove duplicates from ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table.
 
 Uses two CTEs to split txs:
 
