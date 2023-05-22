@@ -57,7 +57,7 @@ Metrics can be divided into 3 categories:
 
     - Follows are calculated following the same structure as for the graph table query (see section above). When calculating the total followers and following for each user, separate methods have been used, empirically testing them with data from the social network. There is some slight mismatch which is thought to be caused by some missing transactions, but the final result is accurate enough (Max. 3% error on one user from the top 10 most followed accounts).
 
-    - Comments for the past 30 days are calculated parsing the *'post:comment:item'* argument from the *'hive_metastore.mainnet.silver_near_social_txs_parsed'* table.
+    - Comments for the past 30 days are calculated parsing the ``post:comment:item`` argument from the ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table.
 
 - Engagement, activity and trending metrics. These are calculated based on the previous categories, with the following definitions:
 
