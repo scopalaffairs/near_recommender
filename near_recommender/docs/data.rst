@@ -32,7 +32,7 @@ Each row of this table represents a follow transaction with:
 - type (FOLLOW or UNFOLLOW)
 - date 
 
-First step is to parse the *'graph:follow'* argument from the *'hive_metastore.mainnet.silver_near_social_txs_parsed'* table and filter non-null, non-empty and non-failed transactions as represented by the *WHERE* clause on the first CTE.
+First step is to parse the ``graph:follow`` argument from the ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table and filter non-null, non-empty and non-failed transactions as represented by the ``WHERE`` clause on the first CTE.
 
 Then, two different CTEs extract the followed user name on two different scenarios:
 
