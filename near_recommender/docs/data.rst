@@ -49,7 +49,7 @@ Query to create a table with different user metrics and calculate trending metri
 
 Metrics can be divided into 3 categories:
 
-- Metrics directly aggregated from the *'hive_metastore.sit.near_social_txs_clean'* table. These include 10 all-time metrics and 4 metrics for the past 30 days. All of them are calculated in the CTEs *'metrics_raw'* and *'last_month_activity'*.
+- Metrics directly aggregated from the ``hive_metastore.sit.near_social_txs_clean`` table. These include 10 all-time metrics and 4 metrics for the past 30 days. All of them are calculated in the CTEs ``metrics_raw`` and ``last_month_activity``.
 
 - Metrics that need additional CTES for their calculation:
 
