@@ -53,7 +53,7 @@ Metrics can be divided into 3 categories:
 
 - Metrics that need additional CTES for their calculation:
 
-    - Likes are calculated parsing the *'index:like'* argument from the *'hive_metastore.mainnet.silver_near_social_txs_parsed'* table and agreggating for the signer:id and the likee separately. Additionally, both metrics are calculated for the past 30 days.
+    - Likes are calculated parsing the ``index:like`` argument from the ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table and agreggating for the signer:id and the likee separately. Additionally, both metrics are calculated for the past 30 days.
 
     - Follows are calculated following the same structure as for the graph table query (see section above). When calculating the total followers and following for each user, separate methods have been used, empirically testing them with data from the social network. There is some slight mismatch which is thought to be caused by some missing transactions, but the final result is accurate enough (Max. 3% error on one user from the top 10 most followed accounts).
 
