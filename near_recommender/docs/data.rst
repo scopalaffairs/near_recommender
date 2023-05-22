@@ -37,7 +37,7 @@ First step is to parse the *'graph:follow'* argument from the *'hive_metastore.m
 Then, two different CTEs extract the followed user name on two different scenarios:
 
 - *'single_user_follows'* extracts the substring that contains the user name. In this case, each transaction represents following one single user
-- *'batch_user_follows'* uses the same logic to extract the user name but uses first an explode to deal with multiple follows in a single transaction. This was enabled by a batch following widget.
+- ``batch_user_follows`` uses the same logic to extract the user name but uses first an explode to deal with multiple follows in a single transaction. This was enabled by a batch following widget.
 
 By merging the two CTEs above, we obtain a table with the edges of the graph representing the following connections in the social network. This table is saved as *'hive_metastore.sit.graph_follows'*.
 
