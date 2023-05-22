@@ -12,7 +12,7 @@ Remove duplicates query
 
 This query is used to remove duplicates from ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table.
 
-Uses two CTEs to split txs:
+The query utilizes two Common Table Expressions (CTEs) to handle transactions:
 
 - *'duplicates'* contains all transactions that are duplicated with a count of the number of times each one appears.
 - *'unique_txs'* contains all unique transactions.
