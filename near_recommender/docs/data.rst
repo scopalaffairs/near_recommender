@@ -17,7 +17,7 @@ The query utilizes two Common Table Expressions (CTEs) to handle transactions:
 - ``duplicates`` This CTE captures all transactions that are duplicated, along with a count indicating how many times each transaction appears.
 - ``unique_txs`` This CTE contains only the unique transactions.
 
-By merging this two CTEs, we obtain a table without duplicates. This table is saved as *'hive_metastore.sit.near_social_txs_clean'*.
+By merging these two CTEs, we create a new table without any duplicates. The resulting table is saved as ``hive_metastore.sit.near_social_txs_clean``.
 
 
 Graph table query
