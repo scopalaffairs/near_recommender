@@ -12,10 +12,10 @@ Remove duplicates query
 
 This query is used to remove duplicates from ``hive_metastore.mainnet.silver_near_social_txs_parsed`` table.
 
-The query utilizes two Common Table Expressions (CTEs) to handle transactions:
+The query utilizes two Common Table Expressions (CTEs) to handle transactions. All transactions are aggregated, with a new column ``tx_count`` counting the number of times each transaction appears. Then, using this column, transactions are filtered:
 
-- ``duplicates`` This CTE captures all transactions that are duplicated, along with a count indicating how many times each transaction appears.
-- ``unique_txs`` This CTE contains only the unique transactions.
+- ``duplicates`` This CTE captures all transactions that are duplicated (``tx_count > 1``).
+- ``unique_txs`` This CTE contains only the unique transactions (``tx_count = 1``).
 
 By merging these two CTEs, we create a new table without any duplicates. The resulting table is saved as ``hive_metastore.sit.near_social_txs_clean``.
 
