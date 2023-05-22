@@ -23,7 +23,7 @@ By merging these two CTEs, we create a new table without any duplicates. The res
 Graph table query
 ^^^^^^^^^^^^^^^^^
 
-Query to create an edge table for the graph representation of the social network.
+This query is used to create an edge table that represents the social network in a graph format.
 
 Each row of this table represents a follow transaction with:
 
