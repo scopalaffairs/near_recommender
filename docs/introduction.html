@@ -420,6 +420,61 @@ This algorithm is applied when the user has specified tags.</p>
 <section id="data">
 <h1>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h1>
 <p>This section provides details about the queries used to feed the models.</p>
+<section id="sql-queries">
+<h2>SQL queries<a class="headerlink" href="#sql-queries" title="Permalink to this heading">#</a></h2>
+<section id="remove-duplicates-query">
+<h3>Remove duplicates query<a class="headerlink" href="#remove-duplicates-query" title="Permalink to this heading">#</a></h3>
+<p>This query is used to remove duplicates from <code class="docutils literal notranslate"><span class="pre">hive_metastore.mainnet.silver_near_social_txs_parsed</span></code> table.</p>
+<p>The query utilizes two Common Table Expressions (CTEs) to handle transactions. All transactions are aggregated, with a new column <code class="docutils literal notranslate"><span class="pre">tx_count</span></code> counting the number of times each transaction appears. Then, using this column, transactions are filtered:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicates</span></code> This CTE captures all transactions that are duplicated (<code class="docutils literal notranslate"><span class="pre">tx_count</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unique_txs</span></code> This CTE contains only the unique transactions (<code class="docutils literal notranslate"><span class="pre">tx_count</span> <span class="pre">=</span> <span class="pre">1</span></code>).</p></li>
+</ul>
+<p>By merging these two CTEs, we create a new table without any duplicates. The resulting table is saved as <code class="docutils literal notranslate"><span class="pre">hive_metastore.sit.near_social_txs_clean</span></code>.</p>
+</section>
+<section id="graph-table-query">
+<h3>Graph table query<a class="headerlink" href="#graph-table-query" title="Permalink to this heading">#</a></h3>
+<p>This query is used to create an edge table that represents the social network in a graph format.</p>
+<p>Each row of this table represents a follow transaction with:</p>
+<ul class="simple">
+<li><p>signer_id</p></li>
+<li><p>user followed</p></li>
+<li><p>type (FOLLOW or UNFOLLOW)</p></li>
+<li><p>date</p></li>
+</ul>
+<p>First step is to parse the <code class="docutils literal notranslate"><span class="pre">graph:follow</span></code> argument from the <code class="docutils literal notranslate"><span class="pre">hive_metastore.mainnet.silver_near_social_txs_parsed</span></code> table and filter non-null, non-empty and non-failed transactions as represented by the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause on the first CTE.</p>
+<p>Then, two different CTEs extract the followed user name on two different scenarios:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">single_user_follows</span></code> extracts the substring that contains the user name. In this case, each transaction represents following one single user</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_user_follows</span></code> uses the same logic to extract the user name but uses first an explode to deal with multiple follows in a single transaction. This was enabled by a batch following widget.</p></li>
+</ul>
+<p>By merging the two CTEs above, we obtain a table with the edges of the graph representing the following connections in the social network. This table is saved as <code class="docutils literal notranslate"><span class="pre">hive_metastore.sit.graph_follows</span></code>.</p>
+</section>
+<section id="user-metrics-query">
+<h3>User metrics query<a class="headerlink" href="#user-metrics-query" title="Permalink to this heading">#</a></h3>
+<p>Query to create a table with different user metrics and calculate trending metric from them.</p>
+<p>Metrics can be divided into 3 categories:</p>
+<ul>
+<li><p>Metrics directly aggregated from the <code class="docutils literal notranslate"><span class="pre">hive_metastore.sit.near_social_txs_clean</span></code> table. These include 10 all-time metrics and 4 metrics for the past 30 days. All of them are calculated in the CTEs <code class="docutils literal notranslate"><span class="pre">metrics_raw</span></code> and <code class="docutils literal notranslate"><span class="pre">last_month_activity</span></code>.</p></li>
+<li><p>Metrics that need additional CTES for their calculation:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Likes are calculated parsing the <code class="docutils literal notranslate"><span class="pre">index:like</span></code> argument from the <code class="docutils literal notranslate"><span class="pre">hive_metastore.mainnet.silver_near_social_txs_parsed</span></code> table and agreggating for the signer:id and the likee separately. Additionally, both metrics are calculated for the past 30 days.</p></li>
+<li><p>Follows are calculated following the same structure as for the graph table query (see section above). When calculating the total followers and following for each user, separate methods have been used, empirically testing them with data from the social network. There is some slight mismatch which is thought to be caused by some missing transactions, but the final result is accurate enough (Max. 3% error on one user from the top 10 most followed accounts).</p></li>
+<li><p>Comments for the past 30 days are calculated parsing the <code class="docutils literal notranslate"><span class="pre">post:comment:item</span></code> argument from the <code class="docutils literal notranslate"><span class="pre">hive_metastore.mainnet.silver_near_social_txs_parsed</span></code> table.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Engagement, activity and trending metrics. These are calculated based on the previous categories, with the following definitions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Engagement is calculated as the sum of comments, likers and followers in the past 30 days. There is a weighted variant using 1, 0.5 and 0.1 weights respectively.</p></li>
+<li><p>Activity is calculated as the sum of posts, likes and followings in the past 30 days. There is a weighted variant using 1, 0.5 and 0.1 weights respectively.</p></li>
+<li><p>The trending metric is defined as the ratio between weighted engagement and weighted activity with the intention of selecting the users which create the most appealing content for the network.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/near_recommender.src.data.html">near_recommender.src.data package</a></li>
@@ -434,6 +489,8 @@ This algorithm is applied when the user has specified tags.</p>
 </li>
 </ul>
 </div>
+</section>
+</section>
 </section>
 
         </article>
@@ -519,6 +576,14 @@ This algorithm is applied when the user has specified tags.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#data">Data</a><ul>
+<li><a class="reference internal" href="#sql-queries">SQL queries</a><ul>
+<li><a class="reference internal" href="#remove-duplicates-query">Remove duplicates query</a></li>
+<li><a class="reference internal" href="#graph-table-query">Graph table query</a></li>
+<li><a class="reference internal" href="#user-metrics-query">User metrics query</a><ul>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
