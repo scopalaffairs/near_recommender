@@ -2,7 +2,10 @@
 name = "near-recommender"
 version = "0.1.0"
 description = "Recommender System for the social platform based on the near protocol."
-authors = ["scopalaffairs <ministry@scopal-affairs.com>"]
+authors = [
+"scopalaffairs <ministry@scopal-affairs.com>", 
+"ARojo <rojoserrano@gmail.com>",
+]
 license = "GNUv3"
 
 [tool.poetry.dependencies]
